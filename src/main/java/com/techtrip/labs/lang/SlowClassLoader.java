@@ -1,17 +1,45 @@
+/*
+* © Copyright, Terry Trippany, TechTrip, 2014.
+* 
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+* 
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+* 
+* See <http://www.gnu.org/licenses/>.
+*/
 package com.techtrip.labs.lang;
 
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * The Class SlowClassLoader.
+ */
 public class SlowClassLoader extends ClassLoader {
 
+	/** The delay ms. */
 	private static long DELAY_MS = 10L;
+	
+	/** The Constant DELAY_SYS_PROP. */
 	private static final String DELAY_SYS_PROP = "com.techtrip.labs.lang.SlowClassLoader.delay";
+	
+	/** The delay sys message. */
 	private static String DELAY_SYS_MESSAGE = String.format("%s: The delay in MS used to load each class by this class loader.", DELAY_SYS_PROP);
 
+	/** The silent mode. */
 	private static boolean SILENT_MODE = true;
+	
+	/** The Constant SILENT_MODE_SYS_PROP. */
 	private static final String SILENT_MODE_SYS_PROP = "com.techtrip.labs.lang.SlowClassLoader.runsilent";
+	
+	/** The silent mode sys message. */
 	private static String SILENT_MODE_SYS_MESSAGE = String.format("%s: Determines whether the classloader echoes each class loaded through it on Sys Out (Default is QUIET/TRUE)", SILENT_MODE_SYS_PROP);
 
 	static {
@@ -58,8 +86,9 @@ public class SlowClassLoader extends ClassLoader {
 	 * super.loadClass() method which in turn will pass the request to the
 	 * parent.
 	 *
-	 * @param name
-	 *            Full class name
+	 * @param name            Full class name
+	 * @return the class
+	 * @throws ClassNotFoundException the class not found exception
 	 */
 	@Override
 	public Class<?> loadClass(String name) throws ClassNotFoundException {
